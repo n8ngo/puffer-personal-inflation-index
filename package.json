@@ -4,9 +4,9 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --color \" \"nodemon ./server/server.js\"",
+    "start": "node server/server.js",
     "build": "webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --color \" \"nodemon ./server/server.js\""
   },
   "author": "Nathan Ngo",
   "license": "ISC",
@@ -42,6 +42,7 @@
   },
   "nodemonConfig": {
     "ignore": [
+      "build",
       "server/data/*",
       "client/*"
     ]

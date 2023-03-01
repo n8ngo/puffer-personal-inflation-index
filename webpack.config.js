@@ -37,16 +37,16 @@ module.exports = {
      * routes api fetch requests from localhost:8080/api/* (webpack dev server)
      * to localhost:3000/api/* (where our Express server is running)
      */
-    proxy: {
-      '/api/**': {
-        target: 'http://localhost:3000/',
-        secure: false,
+    proxy: { 
+      '/': {
+        target: 'http://localhost:3000',
+        secure: false
       },
-      '/assets/**': {
-        target: 'http://localhost:3000/',
-        secure: false,
-      },
-    },
+      '/solo/cats': {
+        target: 'http://localhost:3000',
+        secure: false
+      }
+  }
   },
   module: {
     rules: [

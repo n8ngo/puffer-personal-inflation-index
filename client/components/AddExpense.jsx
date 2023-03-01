@@ -3,6 +3,20 @@ import { useState } from "react";
 
 function AddExpense () {
 
+  fetch('/solo/cats')
+  .then(response => response.json())
+  .then((data) => console.log('REACT FETCH', data))
+  .catch((error) => console.log('FETCH ERROR', error))
+
+
+  const options = ['Gas', 'Groceries', 'Electricity', 'Restaurants', 'Entertainment'];
+  const selectOptions = options.map((element, index) => {
+    console.log(element)
+    return (
+      <option key={index} value={element.toLowerCase()}>{element}</option>
+    )
+  })
+
 
   return (
     <div className='createExpense'>
@@ -20,7 +34,15 @@ function AddExpense () {
           step='0.01'
           required
         />
-
+        <label htmlFor='start'>Date of Purchase</label>
+        <input
+          type='date'
+          id='start'
+        />
+        <label>Category</label>
+        <select id='category dropdown'>
+          {selectOptions}
+        </select>
       </form>
     </div>
 

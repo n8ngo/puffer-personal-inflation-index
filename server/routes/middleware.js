@@ -66,5 +66,14 @@ router.delete('/:id', (req, res, next) => {
   res.status(200).json(res.locals.delete);
 });
 
+router.get('/cats', (req, res, next) => {
+  db.query('SELECT category FROM category')
+  .then(data => {
+    console.log('MIDDLEWARE', data.rows)
+    res.locals.cats = data.rows;
+    res.status(200).json(res.locals.cats)
+  })
+})
+
 
 module.exports = router;
