@@ -1,40 +1,68 @@
 :root {
-  --primary: #faf0ca;
-  --secondary: #FF6F61;
-  --background-primary: #f95738;
-  --background-secondary: #f95738;
+  --primary: #f98e50;
+  --secondary: #e2c044;
+  --background-primary: #e6e6ea;
+  --background-secondary: #f4f4f8;
 }
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: var(--secondary);
+  background-color: var(--background-primary);
 }
 
 .header {
-  border: 1px solid red;
-  background-color: var(--primary);
+  /* border: 1px solid red; */
+  background-color: var(--background-secondary);
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  align-items: center;
   background-color: var(--primary);
 }
 
 main {
   display: flex;
+  gap: 10px;
+
+}
+
+.createExpense {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0px;
+}
+
+input, select, textarea, button{
+  border: 1px solid var(--secondary);
+  border-radius: 10px;
+  background-color: var(--background-secondary);
+  margin: 5px;
+  padding-bottom: 5px;
+  color: var(--primary);
+  text-align: center;
+  
 }
 
 .sidebar {
-  width: 40%;
+  width: 20%;
   height: 80vh;
-  /* display: flex; */
-  /* justify-content: center; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   border: 1px solid blue;
 }
 
 .dropdown {
   width: 25%;
-  margin: 100px auto;
+  /* margin: 100px auto; */
   position: relative;
   cursor: pointer;
 }
@@ -49,6 +77,7 @@ main {
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 .dropdown .dropdown-content {
@@ -56,6 +85,7 @@ main {
   top: 110%;
   left: 0;
   padding-left: 10px;
+  border-radius: 10px;
   box-shadow: 7px 10px 23px -7px rgba(0,0,0,0.65);
   font-weight: bold;
   color: black;
@@ -68,8 +98,29 @@ main {
   cursor: pointer;
   transition: all 0.2s;
   background: var(--background-secondary);
+  border: 1 solid red;
+  margin: 20px;
 }
 
 .dropdown .dropdown-btn .dropdown-item:hover {
   background: var(--background-secondary);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: var(--secondary);
+  display: inline;
+  opacity: 1;
+  display: block;
+  padding-top: 4px;
+  padding-right: 5px;
+  width: 20px;
+  height: 20px;
+  border-width: thin;
+}
+
+.graphics {
+  border: 1px solid green;
+  /* display: flex; */
+  width: 60%;
+  flex: 1;
 }

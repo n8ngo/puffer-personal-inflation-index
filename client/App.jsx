@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { AppContainer } from 'react-hot-loader';
 import Dropdown from './components/Dropdown';
 import AddExpense from './components/AddExpense';
+import ChartData from './components/ChartData';
 
 
 import './styles.css';
@@ -13,20 +14,17 @@ const App = props => {
     <>
       <header className="header">
         <h1>Personal Inflation Index</h1>
+            <Dropdown selected={selected} setSelected={setSelected}/>
       </header>
       <main>
 
+        <div className='graphics'>
+          <ChartData/>
+        </div>
         <div className='sidebar'>
           <AddExpense/>
-          <div>
-            <Dropdown selected={selected} setSelected={setSelected}/>
-          </div>
-          HELLO WORLD
         </div>
 
-        <div className='graphics'>
-
-        </div>
       </main>
     </>
   );

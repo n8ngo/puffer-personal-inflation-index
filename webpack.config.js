@@ -14,7 +14,7 @@ module.exports = {
     filename: 'bundle.js',
   },
   devtool: 'eval-source-map',
-  mode: 'development',
+  mode: process.env.NODE_ENV,
   devServer: {
     host: 'localhost',
     port: 8080,
@@ -22,7 +22,11 @@ module.exports = {
     hot: true,
     // fallback to root for other urls
     historyApiFallback: true,
-
+    // setup(app) {
+    //   app.post('*', (req, res) => {
+    //     res.redirect(req.originalUrl);
+    //   })
+    // },
     static: {
       // match the output path
       directory: path.resolve(__dirname, 'dist'),
@@ -38,11 +42,15 @@ module.exports = {
      * to localhost:3000/api/* (where our Express server is running)
      */
     proxy: { 
+      // '/solo/cats': {
+      //   target: 'http://localhost:3000',
+      //   secure: false
+      // },
+      // '/solo': {
+      //   target: 'http://localhost:3000',
+      //   secure: false
+      // },
       '/': {
-        target: 'http://localhost:3000',
-        secure: false
-      },
-      '/solo/cats': {
         target: 'http://localhost:3000',
         secure: false
       }

@@ -25,7 +25,6 @@ router.get('/', (req, res, next) => {
 
 //ADD Expense
 router.post('/', (req, res, next) => {
-  console.log('inside post', req.body)
   const {exp_name, exp_amt, exp_created, exp_category, exp_note} = req.body;
   const queryText = 'INSERT INTO expense (exp_name, exp_amt, exp_created, exp_category, exp_note) VALUES ($1, $2, $3, $4, $5) RETURNING *';
   const params = [
@@ -37,13 +36,13 @@ router.post('/', (req, res, next) => {
   ];
   db.query(queryText, params)
     .then((data) => {
-      console.log(data.rows);
       res.locals.addResult = data.rows;
       return next();
     });
 },
 (req, res) => {
-  res.status(200).json(res.locals.addResult);
+  // res.status(200).json(res.locals.addResult);
+  res.sendStatus(200);
 }
 );
 
@@ -67,9 +66,9 @@ router.delete('/:id', (req, res, next) => {
 });
 
 router.get('/cats', (req, res, next) => {
-  db.query('SELECT category FROM category')
+  db.query('SELECT category, _id FROM category')
   .then(data => {
-    console.log('MIDDLEWARE', data.rows)
+    // console.log('MIDDLEWARE', data.rows)
     res.locals.cats = data.rows;
     res.status(200).json(res.locals.cats)
   })
