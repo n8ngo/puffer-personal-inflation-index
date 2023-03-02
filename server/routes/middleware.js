@@ -4,7 +4,7 @@ const router = express.Router();
 
 //GET ALL Expenses
 router.get('/', (req, res, next) => {
-  db.query('SELECT * FROM EXPENSE')
+  db.query('SELECT expense.*, category AS category_name From expense LEFT OUTER JOIN category ON category._id = exp_category')
     .then(data => {
       res.locals.allExpenses = data.rows;
       console.log(data.rows);

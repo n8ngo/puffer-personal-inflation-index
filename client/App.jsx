@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import { useState } from 'react';
 import { AppContainer } from 'react-hot-loader';
 import Dropdown from './components/Dropdown';
@@ -11,6 +11,7 @@ import './styles.css';
 const App = props => {
   const [selected, setSelected] = useState('Category');
   return (
+    
     <>
       <header className="header">
         <h1>Personal Inflation Index</h1>
@@ -27,6 +28,7 @@ const App = props => {
 
       </main>
     </>
+    
   );
 };
 

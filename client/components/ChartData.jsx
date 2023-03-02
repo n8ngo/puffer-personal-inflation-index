@@ -1,7 +1,87 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Suspense } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { useState, useEffect } from "react";
 
+function ChartData() {
+  //DECLARE STATE
+  const[data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch('/solo')
+    .then(response => response.json())
+    .then((data) => {
+      //sort by date
+      data.sort(( a , b ) => (a.exp_created < b.exp_created) ? -1 : ((a.exp_created > b.exp_created) ? 1 : 0))
+      const newData = [];
+      data.forEach( (object, i) => {
+
+        //CALC DATE FROM ISO AND DOLLAR FROM STRING
+        let date = isoToDate(object.exp_created)
+        let dollar = Number(object.exp_amt.replace(/[^0-9.-]+/g,""))
+
+        //CALC PERCENT CHANGE
+        let percentChange;
+        let currentVal = Number(object.exp_amt.replace(/[^0-9.-]+/g,""));
+        let pastVal;
+        if (i === 0) percentChange = 0;
+        if (i > 0) {
+          pastVal = Number(data[i-1].exp_amt.replace(/[^0-9.-]+/g,""))
+          percentChange = (((currentVal - pastVal) / pastVal) * 100).toFixed(2);
+      };
+
+        //PUSH TO NEW ARRAY
+        newData.push({Created: date, Amount: dollar, Category: object.category_name, Percent_Change: Number(percentChange)})
+      })
+      setData(newData);
+    })
+  }, [])
+
+
+  function isoToDate (ISOString) {
+    let date = new Date(ISOString);
+    let year = date.getFullYear();
+    let month = date.getMonth()+1;
+    let dt = date.getDate();
+    if (dt < 10) dt = '0' + dt
+    if (month < 10) month = '0' + month
+   return (year+'-' + month + '-' + dt);
+  }
+
+  console.log("Chart DATA", data)
+
+    return (
+      <>
+        <div>
+          HELLO WORLD
+        </div>
+        <ResponsiveContainer id='chart' width="100%" aspect={2} >
+          <LineChart
+            width={500}
+            height={300}
+            data={data}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="Created" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="Amount" stroke="#8884d8" activeDot={{ r: 8 }} />
+            <Line type="monotone" dataKey="Percent_Change" stroke="#82ca9d" />
+          </LineChart>
+        </ResponsiveContainer>
+      </>
+    );
+  }
+
+
+
+export default ChartData
 
 // const data = [
 //   {
@@ -47,60 +127,3 @@ import { useState, useEffect } from "react";
 //     amt: 2100,
 //   },
 // ];
-
-function ChartData() {
-  //DECLARE STATE
-  const[data, setData] = useState([]);
-
-  useEffect(() => {
-    fetch('/solo')
-    .then(response => response.json())
-    .then((data) => {
-      //sort by date
-      data.sort(( a , b ) => b.exp_created - a.exp_created)
-
-      setData(data);
-    })
-  }, [])
-
-  console.log("Chart DATA", data)
-
-  // useEffect(() => {
-  //   fetch('/favorite')
-  //   .then(response => response.json())
-  //   .then(data => setFavoriteMovies(data))
-  //   .then(console.log('FAV MOVIES IN THEN CHAIN', favoriteMovies))
-  //   .catch((e) => console.log(e))
-  // }, []);
-
-  // console.log('fav movies outside useeffect', favoriteMovies)
-
-    return (
-        <ResponsiveContainer id='chart' width="100%" >
-          <LineChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-          </LineChart>
-        </ResponsiveContainer>
- 
-    );
-  }
-
-
-
-export default ChartData
