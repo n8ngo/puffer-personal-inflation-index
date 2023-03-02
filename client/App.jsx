@@ -4,6 +4,7 @@ import { AppContainer } from 'react-hot-loader';
 import Dropdown from './components/Dropdown';
 import AddExpense from './components/AddExpense';
 import ChartData from './components/ChartData';
+import ListFiles from './components/ListFiles';
 import './styles.css';
 
 /*
@@ -14,6 +15,8 @@ import './styles.css';
 */
 
 const App = props => {
+
+  //FOR ADD EXPENSE
   const [categories, setCategories] = useState([]);
   const [expenseName, setExpenseName] = useState('');
   const [expenseAmount, setExpenseAmount] = useState('');
@@ -21,6 +24,8 @@ const App = props => {
   const [category, setCategory] = useState('')
   const [expenseNote, setExpenseNote] = useState('');
 
+  //FOR CHARTDATA
+  const[data, setData] = useState([]);
 
   const [selected, setSelected] = useState('Category');
   return (
@@ -34,7 +39,7 @@ const App = props => {
       <main>
 
         <div className='graphics'>
-          <ChartData category={category}/>
+          <ChartData category={category} data={data} setData={setData}/>
         </div>
         <div className='sidebar'>
           <AddExpense 
@@ -44,6 +49,9 @@ const App = props => {
         </div>
 
       </main>
+      <footer>
+        <ListFiles/>
+      </footer>
       </Suspense>
     </>
     

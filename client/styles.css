@@ -28,10 +28,15 @@ main {
 
 }
 
-.createExpense {
+.createExpense, .add-category{
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.add-category {
+  font-weight: 600;
+  text-align: center;
 }
 
 form {

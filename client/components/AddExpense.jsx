@@ -53,12 +53,11 @@ function AddExpense ({categories,expenseName,expenseAmount,expenseDate,category,
       setCategory('');
       setExpenseNote('');
     })
-
-
   }
 
 
   return (
+   <>
     <div className='createExpense'>
       <h2>Add a New Expense</h2>
       <form onSubmit={handleSubmit}>
@@ -95,7 +94,18 @@ function AddExpense ({categories,expenseName,expenseAmount,expenseDate,category,
         <button>Add Expense</button>
       </form>
     </div>
-
+    <div className='add-category'>
+      <form>
+        <label>Add a Category</label>
+        <input
+          type='text'
+          required
+          onChange={(e) => setNewCat}
+        />
+        <button>Submit</button>
+      </form>
+    </div>
+  </> 
 
 
   );

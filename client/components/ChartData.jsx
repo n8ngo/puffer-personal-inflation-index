@@ -2,10 +2,10 @@ import React, { PureComponent, Suspense } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
 import { useState, useEffect } from "react";
 
-function ChartData({category}) {
+function ChartData({category, data, setData}) {
   //DECLARE STATE
   const [categories, setCategories] = useState([]);
-  const[data, setData] = useState([]);
+  // const[data, setData] = useState([]);
   const[selectCat, setSelectCat] = useState('')
   const[time, setTime] = useState('')
 
