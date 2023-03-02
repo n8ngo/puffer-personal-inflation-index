@@ -2,7 +2,7 @@ import React, { PureComponent, Suspense } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
 import { useState, useEffect } from "react";
 
-function ChartData() {
+function ChartData({category}) {
   //DECLARE STATE
   const [categories, setCategories] = useState([]);
   const[data, setData] = useState([]);
@@ -36,10 +36,12 @@ function ChartData() {
         //PUSH TO NEW ARRAY
         if (selectCat === '' || selectCat === object.exp_category || selectCat === 'All')
           newData.push({Created: date, Amount: dollar, Category: object.category_name, Percent_Change: Number(percentChange)})
+          console.log('TIME NEW DATA', newData)
       })
       setData(newData);
     })
-  }, [selectCat])
+  }, [selectCat, category])
+  //^ADDED CATEGORY PROP TO GET CHART TO RE-RENDER UPON NEW EXPENSE ADDED, BUT IT RENDERS WAY TOO MANY TIMES
 
 
 
@@ -73,6 +75,7 @@ function ChartData() {
 
   //USEEFFECT FOR TIME CHANGE
   useEffect(() => {
+    
     console.log('time changed')
     const newData = [];
     const cache = {};
@@ -100,7 +103,7 @@ function ChartData() {
         object.Percent_Change = percentChange;
       }
     })
-    console.log("Chart DATA", newData)
+    console.log("Chart DATA TIME", newData)
     setData(newData);
   }, [time])
 

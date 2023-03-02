@@ -1,15 +1,15 @@
 import React, { Component, Suspense } from 'react';
 import { useState, useEffect } from "react";
 
-function AddExpense () {
+function AddExpense ({categories,expenseName,expenseAmount,expenseDate,category,expenseNote,setCategories,setExpenseName,setExpenseAmount,setExpenseDate,setCategory,setExpenseNote}) {
 
 //DECLARE STATE
-const [categories, setCategories] = useState([]);
-const [expenseName, setExpenseName] = useState('');
-const [expenseAmount, setExpenseAmount] = useState('');
-const [expenseDate, setExpenseDate] = useState('');
-const [category, setCategory] = useState('')
-const [expenseNote, setExpenseNote] = useState('');
+// const [categories, setCategories] = useState([]);
+// const [expenseName, setExpenseName] = useState('');
+// const [expenseAmount, setExpenseAmount] = useState('');
+// const [expenseDate, setExpenseDate] = useState('');
+// const [category, setCategory] = useState('')
+// const [expenseNote, setExpenseNote] = useState('');
 // const [newExpense, ]
 
 //GET ALL CATEGORIES FROM CATEGORY TABLE. STORE IN STATE (CATEGORIES)
