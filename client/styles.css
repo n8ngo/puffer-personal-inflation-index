@@ -1,12 +1,13 @@
 :root {
   --primary: #f98e50;
-  --secondary: #e2c044;
+  --secondary: #ffe585;
   --background-primary: #e6e6ea;
   --background-secondary: #f4f4f8;
+  --border-radius: 10px;
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
   background-color: var(--background-primary);
@@ -44,9 +45,10 @@ form {
   outline: none;
 }
 
+
 input, select, textarea, button{
   border: 1px solid var(--secondary);
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   background-color: var(--background-secondary);
   margin: 5px;
   padding-bottom: 5px;
@@ -82,7 +84,7 @@ input, select, textarea, button{
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: var(--border-radius);
 }
 
 .dropdown .dropdown-content {
@@ -90,7 +92,7 @@ input, select, textarea, button{
   top: 110%;
   left: 0;
   padding-left: 10px;
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   box-shadow: 7px 10px 23px -7px rgba(0,0,0,0.65);
   font-weight: bold;
   color: black;
@@ -124,8 +126,24 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .graphics {
-  border: 1px solid green;
+  /* border: 1px solid green; */
   /* display: flex; */
   width: 60%;
   flex: 1;
+}
+
+.view-selector {
+  border: 1px solid green;
+  align-self: center;
+  /* display: block; */
+  /* flex-direction: row; */
+  /* align-content: center; */
+  width: 30%;
+  margin-left: 35%;
+  margin-top: 10px;
+  padding: 3px;
+  border-radius: var(--border-radius);
+  background-color: var(--secondary);
+  text-align: center;
+
 }

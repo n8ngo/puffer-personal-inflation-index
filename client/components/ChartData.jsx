@@ -1,5 +1,5 @@
 import React, { PureComponent, Suspense } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
 import { useState, useEffect } from "react";
 
 function ChartData() {
@@ -9,6 +9,7 @@ function ChartData() {
   const[selectCat, setSelectCat] = useState('')
   const[time, setTime] = useState('')
 
+  //USE EFFECT FOR CATEGORY CHANGES
   useEffect(() => {
     fetch('/solo')
     .then(response => response.json())
@@ -52,7 +53,7 @@ function ChartData() {
    return (year+'-' + month + '-' + dt);
   }
 
-
+  //USEEFFECT FOR GETTING CATEGORIES
   useEffect(() => {
     fetch('/solo/cats')
     .then(response => response.json())
@@ -70,6 +71,7 @@ function ChartData() {
   fetchedCategories.unshift((<option>All</option>))
   fetchedCategories.unshift((<option>Pick One...</option>))
 
+  //USEEFFECT FOR TIME CHANGE
   useEffect(() => {
     console.log('time changed')
     const newData = [];
@@ -106,8 +108,8 @@ function ChartData() {
 
     return (
       <>
-        <div>
-          <form >
+        <div className='view-selector'>
+          <form>
             <label>View by Category</label>
               <select onChange={(e) => setSelectCat(e.target.value)}>
                 {fetchedCategories}
@@ -136,8 +138,9 @@ function ChartData() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="Amount" stroke="#8884d8" activeDot={{ r: 8 }} />
-            <Line type="monotone" dataKey="Percent_Change" stroke="#82ca9d" />
+            <Line type="monotone" dataKey="Amount" stroke="#8884d8" activeDot={{ r: 8 }} strokeWidth={4}/>
+            <Line type="monotone" dataKey="Percent_Change" stroke="#82ca9d" strokeWidth={2}/>
+            <ReferenceLine y={0} stroke="#000000"/>
           </LineChart>
         </ResponsiveContainer>
       </>
