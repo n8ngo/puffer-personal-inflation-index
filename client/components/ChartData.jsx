@@ -7,6 +7,7 @@ function ChartData() {
   const [categories, setCategories] = useState([]);
   const[data, setData] = useState([]);
   const[selectCat, setSelectCat] = useState('')
+  const[time, setTime] = useState('')
 
   useEffect(() => {
     fetch('/solo')
@@ -30,17 +31,15 @@ function ChartData() {
           pastVal = Number(data[i-1].exp_amt.replace(/[^0-9.-]+/g,""))
           percentChange = (((currentVal - pastVal) / pastVal) * 100).toFixed(2);
       };
-      
-        //PUSH TO NEW ARRAY
-        if (selectCat === '' || selectCat === object.exp_category)
-          newData.push({Created: date, Amount: dollar, Category: object.category_name, Percent_Change: Number(percentChange)})
-   
-      })
-      console.log('SELECT CAT', selectCat)
 
+        //PUSH TO NEW ARRAY
+        if (selectCat === '' || selectCat === object.exp_category || selectCat === 'All')
+          newData.push({Created: date, Amount: dollar, Category: object.category_name, Percent_Change: Number(percentChange)})
+      })
       setData(newData);
     })
   }, [selectCat])
+
 
 
   function isoToDate (ISOString) {
@@ -53,7 +52,6 @@ function ChartData() {
    return (year+'-' + month + '-' + dt);
   }
 
-  console.log("Chart DATA", data)
 
   useEffect(() => {
     fetch('/solo/cats')
@@ -62,14 +60,49 @@ function ChartData() {
       setCategories(data);
     })
     .catch((error) => console.log('Fetch Error AddExpense.jsx useEffect: ', error));
-  }, [])
+  }, [time])
 
   const fetchedCategories = categories.map( (object, index) => {
     return (
       <option key={index} value={object._id}>{object.category}</option>
     )
   })
+  fetchedCategories.unshift((<option>All</option>))
   fetchedCategories.unshift((<option>Pick One...</option>))
+
+  useEffect(() => {
+    console.log('time changed')
+    const newData = [];
+    const cache = {};
+    data.forEach(object => {
+      if (!cache.hasOwnProperty(object.Created.slice(0,7))) {
+        cache[object.Created.slice(0,7)] = object.Amount;
+      } else {
+        cache[object.Created.slice(0,7)] += object.Amount;  
+      }
+    })
+    Object.keys(cache).forEach(key => {
+      newData.push({
+        Created: key,
+        Amount: cache[key]
+      })
+    })
+    newData.forEach((object,i) => {
+      let percentChange;
+      let currentVal = Number(object.Amount.toString().replace(/[^0-9.-]+/g,""));
+      let pastVal;
+      if (i === 0) percentChange = 0;
+      if (i > 0) {
+        pastVal = Number(newData[i-1].Amount.toString().replace(/[^0-9.-]+/g,""))
+        percentChange = (((currentVal - pastVal) / pastVal) * 100).toFixed(2);
+        object.Percent_Change = percentChange;
+      }
+    })
+    console.log("Chart DATA", newData)
+    setData(newData);
+  }, [time])
+
+
 
     return (
       <>
@@ -78,6 +111,11 @@ function ChartData() {
             <label>View by Category</label>
               <select onChange={(e) => setSelectCat(e.target.value)}>
                 {fetchedCategories}
+              </select>
+            <label>Time Group</label>
+              <select onChange={(e) => setTime(e.target.value)}>
+                <option>All Time</option>
+                <option>By Month</option>
               </select>
           </form>
         </div>
@@ -110,47 +148,3 @@ function ChartData() {
 
 export default ChartData
 
-// const data = [
-//   {
-//     name: 'Page A',
-//     uv: 4000,
-//     pv: 2400,
-//     amt: 2400,
-//   },
-//   {
-//     name: 'Page B',
-//     uv: 3000,
-//     pv: 1398,
-//     amt: 2210,
-//   },
-//   {
-//     name: 'Page C',
-//     uv: 2000,
-//     pv: 9800,
-//     amt: 2290,
-//   },
-//   {
-//     name: 'Page D',
-//     uv: 2780,
-//     pv: 3908,
-//     amt: 2000,
-//   },
-//   {
-//     name: 'Page E',
-//     uv: 1890,
-//     pv: 4800,
-//     amt: 2181,
-//   },
-//   {
-//     name: 'Page F',
-//     uv: 2390,
-//     pv: 3800,
-//     amt: 2500,
-//   },
-//   {
-//     name: 'Page G',
-//     uv: 3490,
-//     pv: 4300,
-//     amt: 2100,
-//   },
-// ];

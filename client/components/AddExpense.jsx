@@ -10,6 +10,7 @@ const [expenseAmount, setExpenseAmount] = useState('');
 const [expenseDate, setExpenseDate] = useState('');
 const [category, setCategory] = useState('')
 const [expenseNote, setExpenseNote] = useState('');
+// const [newExpense, ]
 
 //GET ALL CATEGORIES FROM CATEGORY TABLE. STORE IN STATE (CATEGORIES)
   useEffect(() => {
