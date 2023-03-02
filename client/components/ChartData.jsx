@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 
 function ChartData() {
   //DECLARE STATE
+  const [categories, setCategories] = useState([]);
   const[data, setData] = useState([]);
+  const[selectCat, setSelectCat] = useState('')
 
   useEffect(() => {
     fetch('/solo')
@@ -28,13 +30,17 @@ function ChartData() {
           pastVal = Number(data[i-1].exp_amt.replace(/[^0-9.-]+/g,""))
           percentChange = (((currentVal - pastVal) / pastVal) * 100).toFixed(2);
       };
-
+      
         //PUSH TO NEW ARRAY
-        newData.push({Created: date, Amount: dollar, Category: object.category_name, Percent_Change: Number(percentChange)})
+        if (selectCat === '' || selectCat === object.exp_category)
+          newData.push({Created: date, Amount: dollar, Category: object.category_name, Percent_Change: Number(percentChange)})
+   
       })
+      console.log('SELECT CAT', selectCat)
+
       setData(newData);
     })
-  }, [])
+  }, [selectCat])
 
 
   function isoToDate (ISOString) {
@@ -49,10 +55,31 @@ function ChartData() {
 
   console.log("Chart DATA", data)
 
+  useEffect(() => {
+    fetch('/solo/cats')
+    .then(response => response.json())
+    .then((data) => {
+      setCategories(data);
+    })
+    .catch((error) => console.log('Fetch Error AddExpense.jsx useEffect: ', error));
+  }, [])
+
+  const fetchedCategories = categories.map( (object, index) => {
+    return (
+      <option key={index} value={object._id}>{object.category}</option>
+    )
+  })
+  fetchedCategories.unshift((<option>Pick One...</option>))
+
     return (
       <>
         <div>
-          HELLO WORLD
+          <form >
+            <label>View by Category</label>
+              <select onChange={(e) => setSelectCat(e.target.value)}>
+                {fetchedCategories}
+              </select>
+          </form>
         </div>
         <ResponsiveContainer id='chart' width="100%" aspect={2} >
           <LineChart

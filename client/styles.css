@@ -40,6 +40,10 @@ form {
   margin: 0px;
 }
 
+*:focus {
+  outline: none;
+}
+
 input, select, textarea, button{
   border: 1px solid var(--secondary);
   border-radius: 10px;
@@ -48,6 +52,7 @@ input, select, textarea, button{
   padding-bottom: 5px;
   color: var(--primary);
   text-align: center;
+  
   
 }
 

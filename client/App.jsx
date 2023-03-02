@@ -13,6 +13,7 @@ const App = props => {
   return (
     
     <>
+    <Suspense fallback={<div>LOADING</div>}>
       <header className="header">
         <h1>Personal Inflation Index</h1>
             <Dropdown selected={selected} setSelected={setSelected}/>
@@ -27,6 +28,7 @@ const App = props => {
         </div>
 
       </main>
+      </Suspense>
     </>
     
   );
