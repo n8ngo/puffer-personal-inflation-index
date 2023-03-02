@@ -4,10 +4,11 @@ import { useState, useEffect } from "react";
 
 function ChartData({category, data, setData}) {
   //DECLARE STATE
-  const [categories, setCategories] = useState([]);
+  const[categories, setCategories] = useState([]);
   // const[data, setData] = useState([]);
   const[selectCat, setSelectCat] = useState('')
   const[time, setTime] = useState('')
+  const[average, setAverage] = useState('');
 
   //USE EFFECT FOR CATEGORY CHANGES
   useEffect(() => {
@@ -40,8 +41,15 @@ function ChartData({category, data, setData}) {
         // if (selectCat === '' || selectCat === object.exp_category || selectCat === 'All')
       })
       setData(newData);
+      console.log('AVERAGE', newData.length)
+      let ave = 0;
+      for (let i = 0; i < newData.length; i++) {
+        ave += newData[i].Percent_Change;
+      }
+      ave = (ave / newData.length).toFixed(2)
+      setAverage(ave)
     })
-  }, [selectCat, category])
+  }, [selectCat, category, average])
   //^ADDED CATEGORY PROP TO GET CHART TO RE-RENDER UPON NEW EXPENSE ADDED, BUT IT RENDERS WAY TOO MANY TIMES
 
 
@@ -126,6 +134,9 @@ function ChartData({category, data, setData}) {
                 <option>By Month</option>
               </select>
           </form>
+          <div>
+            Average Change: {average}%
+          </div>
         </div>
         
         <ResponsiveContainer id='chart' width="100%" aspect={2} >
