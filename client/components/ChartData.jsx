@@ -18,24 +18,26 @@ function ChartData({category, data, setData}) {
       data.sort(( a , b ) => (a.exp_created < b.exp_created) ? -1 : ((a.exp_created > b.exp_created) ? 1 : 0))
       const newData = [];
       data.forEach( (object, i) => {
+        if (selectCat === '' || selectCat === object.exp_category || selectCat === 'All') {
 
-        //CALC DATE FROM ISO AND DOLLAR FROM STRING
-        let date = isoToDate(object.exp_created)
-        let dollar = Number(object.exp_amt.replace(/[^0-9.-]+/g,""))
-
-        //CALC PERCENT CHANGE
-        let percentChange;
-        let currentVal = Number(object.exp_amt.replace(/[^0-9.-]+/g,""));
-        let pastVal;
-        if (i === 0) percentChange = 0;
-        if (i > 0) {
-          pastVal = Number(data[i-1].exp_amt.replace(/[^0-9.-]+/g,""))
-          percentChange = (((currentVal - pastVal) / pastVal) * 100).toFixed(2);
-      };
+          //CALC DATE FROM ISO AND DOLLAR FROM STRING
+          let date = isoToDate(object.exp_created)
+          let dollar = Number(object.exp_amt.replace(/[^0-9.-]+/g,""))
+  
+          //CALC PERCENT CHANGE
+          let percentChange;
+          let currentVal = Number(object.exp_amt.replace(/[^0-9.-]+/g,""));
+          let pastVal;
+          if (i === 0) percentChange = 0;
+          if (i > 0) {
+            pastVal = Number(data[i-1].exp_amt.replace(/[^0-9.-]+/g,""))
+            percentChange = (((currentVal - pastVal) / pastVal) * 100).toFixed(2);
+            newData.push({Created: date, Amount: dollar, Category: object.category_name, Percent_Change: Number(percentChange)})
+        };
+        }
 
         //PUSH TO NEW ARRAY
-        if (selectCat === '' || selectCat === object.exp_category || selectCat === 'All')
-          newData.push({Created: date, Amount: dollar, Category: object.category_name, Percent_Change: Number(percentChange)})
+        // if (selectCat === '' || selectCat === object.exp_category || selectCat === 'All')
       })
       setData(newData);
     })
@@ -75,7 +77,7 @@ function ChartData({category, data, setData}) {
   //USEEFFECT FOR TIME CHANGE
   useEffect(() => {
     
-    // console.log('time changed')
+    console.log('time changed')
     const newData = [];
     const cache = {};
     data.forEach(object => {
@@ -101,8 +103,10 @@ function ChartData({category, data, setData}) {
         percentChange = (((currentVal - pastVal) / pastVal) * 100).toFixed(2);
         object.Percent_Change = percentChange;
       }
+      // let dollar = Number(object.exp_amt.replace(/[^0-9.-]+/g,""))
+      // object.Amount = dollar;
     })
-    // console.log("Chart DATA TIME", newData)
+    console.log("Chart DATA TIME", newData)
     setData(newData);
   }, [time])
 
@@ -123,6 +127,7 @@ function ChartData({category, data, setData}) {
               </select>
           </form>
         </div>
+        
         <ResponsiveContainer id='chart' width="100%" aspect={2} >
           <LineChart
             width={500}
@@ -141,7 +146,7 @@ function ChartData({category, data, setData}) {
             <Tooltip />
             <Legend />
             <Line type="monotone" dataKey="Amount" stroke="#8884d8" activeDot={{ r: 8 }} strokeWidth={4}/>
-            <Line type="monotone" dataKey="Percent_Change" stroke="#82ca9d" strokeWidth={2}/>
+            <Line type="monotone" dataKey="Percent_Change" stroke="#82ca9d" strokeWidth={2} />
             <ReferenceLine y={0} stroke="#000000"/>
           </LineChart>
         </ResponsiveContainer>

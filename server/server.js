@@ -2,7 +2,6 @@ const path = require('path');
 const express = require('express');
 const db = require('./models/dbConnect.js')
 const app = express();
-
 const middleware = require('./routes/middleware');
 
 const PORT = 3000;
@@ -17,10 +16,13 @@ app.use(express.urlencoded({ extended: true }));
  * handle requests for static files
  */
 app.use(express.static(path.resolve(__dirname, '../client')));
-
+// app.get('/', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../dist'));
+// });
 /**
  * define route handlers
  */
+
 app.use('/solo', middleware);
 
 

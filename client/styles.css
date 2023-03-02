@@ -1,26 +1,48 @@
 :root {
-  --primary: #f98e50;
-  --secondary: #ffe585;
-  --background-primary: #e6e6ea;
-  --background-secondary: #f4f4f8;
+  --primary: #aaaaaa;
+  --secondary: #e0e0e0;
+  --background-primary: #dadada;
+  --background-secondary: #c1c1c1;;
   --border-radius: 10px;
+}
+
+span {
+  font-size: .75rem;
+  padding-left: 30px;
+}
+
+img {
+  height: 80px;
+  margin-left: 60px;
+  
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: var(--background-primary);
+  /* aspect-ratio: 960/540; */
+  /* background-image: url(./waves.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: color-dodge;
+  background-color: var(--background-primary); */
 }
 
 .header {
   /* border: 1px solid red; */
   background-color: var(--background-secondary);
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
   background-color: var(--primary);
 }
+
+h1 {
+  margin-left: 30px;
+}
+
+
 
 main {
   display: flex;
@@ -54,10 +76,10 @@ form {
 input, select, textarea, button{
   border: 1px solid var(--secondary);
   border-radius: var(--border-radius);
-  background-color: var(--background-secondary);
+  background-color: var(--secondary);
   margin: 5px;
   padding-bottom: 5px;
-  color: var(--primary);
+  color: black;
   text-align: center;
   
   
@@ -69,7 +91,12 @@ input, select, textarea, button{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  border: 1px solid blue;
+  margin-top: 10px;
+  margin-right: 10px;
+  /* border: 1px solid blue; */
+  padding: 5px;
+  background-color: var(--background-secondary);
+  border-radius: var(--border-radius);
 }
 
 .dropdown {
@@ -148,18 +175,49 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   margin-top: 10px;
   padding: 3px;
   border-radius: var(--border-radius);
-  background-color: var(--secondary);
+  background-color: var(--background-secondary);
   text-align: center;
 }
 
-footer {
-  
+.footer {
+  display: flex;
+  justify-content: center;
+  max-height: 50%;
+}
+
+.lineItemContainer {
+  margin-top: 10px;
+  height: 400px;
+  overflow: scroll;
+}
+
+.lineItemContainer::-webkit-scrollbar {
+  display: none;
 }
 
 table {
-  border: 1px solid black;
-  width: 80%;
+  /* border: 1px solid black; */
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
   align-content: center;
-  /* display: flex; */
+  text-align: center;
+  border-radius: var(--border-radius);
+  background-color: var(--background-secondary)
 
+  /* display: flex; */
+}
+
+.toprow {
+  border: 1px solid black;
+}
+
+ td {
+  /* border-right: 1px solid rgb(238, 238, 238); */
+  border-top: 1px solid rgb(238, 238, 238);
+  padding: 5px;
+}
+
+.whywhywhy {
+  margin-top: 200px;
 }

@@ -33,8 +33,8 @@ const App = props => {
     <>
     <Suspense fallback={<div>LOADING</div>}>
       <header className="header">
-        <h1>Personal Inflation Index</h1>
-            <Dropdown selected={selected} setSelected={setSelected}/>
+        <img src="./puffer.png" alt="" />
+        <h1>Puffer <span>A personalized inflation tracking tool!</span></h1>
       </header>
       <main>
 
@@ -50,8 +50,13 @@ const App = props => {
 
       </main>
       <footer>
-        <ListFiles data={data} setData={setData}/>
+        <div className='footer'>
+          <ListFiles data={data} setData={setData}/>
+        </div>
       </footer>
+      <div className='whywhywhy'>
+        <Dropdown selected={selected} setSelected={setSelected}/>
+      </div>
       </Suspense>
     </>
     

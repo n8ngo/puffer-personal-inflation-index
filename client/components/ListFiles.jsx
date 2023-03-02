@@ -37,15 +37,15 @@ const ListFiles = ({data, setData}) => {
         <td>{object.exp_amt}</td>
         <td>{object.exp_created.slice(0,10)}</td>
         <td>{object.exp_note}</td>
-        <td><button id={object._id} onClick={handleDelete}>X</button></td>
+        <td><button id={object._id} onClick={handleDelete}>Delete</button></td>
       </tr>
     )
   })
 
   return (
-    <>
-      <table className='lineItemContainer'>
-        <tr>
+    <div className='lineItemContainer'>
+      <table>
+        <tr className='toprow'>
           <th>Category</th>
           <th>Name</th>
           <th>Amount</th>
@@ -56,7 +56,7 @@ const ListFiles = ({data, setData}) => {
         {lineItemComponents}
       </table>
 
-    </>
+    </div>
   )
 }
 
