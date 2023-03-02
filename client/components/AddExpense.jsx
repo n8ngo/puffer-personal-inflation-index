@@ -55,6 +55,8 @@ function AddExpense ({categories,expenseName,expenseAmount,expenseDate,category,
     })
   }
 
+//NEEDS HANDLE SUBMIT FOR ADD CATEGORY
+
 
   return (
    <>

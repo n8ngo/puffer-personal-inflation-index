@@ -36,7 +36,6 @@ function ChartData({category, data, setData}) {
         //PUSH TO NEW ARRAY
         if (selectCat === '' || selectCat === object.exp_category || selectCat === 'All')
           newData.push({Created: date, Amount: dollar, Category: object.category_name, Percent_Change: Number(percentChange)})
-          console.log('TIME NEW DATA', newData)
       })
       setData(newData);
     })
@@ -76,7 +75,7 @@ function ChartData({category, data, setData}) {
   //USEEFFECT FOR TIME CHANGE
   useEffect(() => {
     
-    console.log('time changed')
+    // console.log('time changed')
     const newData = [];
     const cache = {};
     data.forEach(object => {
@@ -103,7 +102,7 @@ function ChartData({category, data, setData}) {
         object.Percent_Change = percentChange;
       }
     })
-    console.log("Chart DATA TIME", newData)
+    // console.log("Chart DATA TIME", newData)
     setData(newData);
   }, [time])
 

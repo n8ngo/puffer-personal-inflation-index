@@ -138,7 +138,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .view-selector {
-  border: 1px solid green;
+  /* border: 1px solid green; */
   align-self: center;
   /* display: block; */
   /* flex-direction: row; */
@@ -150,5 +150,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border-radius: var(--border-radius);
   background-color: var(--secondary);
   text-align: center;
+}
+
+footer {
+  
+}
+
+table {
+  border: 1px solid black;
+  width: 80%;
+  align-content: center;
+  /* display: flex; */
 
 }

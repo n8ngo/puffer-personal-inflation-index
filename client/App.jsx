@@ -50,7 +50,7 @@ const App = props => {
 
       </main>
       <footer>
-        <ListFiles/>
+        <ListFiles data={data} setData={setData}/>
       </footer>
       </Suspense>
     </>
