@@ -39,7 +39,7 @@ const App = props => {
       <main>
 
         <div className='graphics'>
-          <ChartData category={category} data={data} setData={setData}/>
+          <ChartData expenseNote={expenseNote} data={data} setData={setData}/>
         </div>
         <div className='sidebar'>
           <AddExpense 

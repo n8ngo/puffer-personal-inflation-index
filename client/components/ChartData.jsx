@@ -2,7 +2,7 @@ import React, { PureComponent, Suspense } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
 import { useState, useEffect } from "react";
 
-function ChartData({category, data, setData}) {
+function ChartData({expenseNote, data, setData}) {
   //DECLARE STATE
   const[categories, setCategories] = useState([]);
   // const[data, setData] = useState([]);
@@ -49,7 +49,7 @@ function ChartData({category, data, setData}) {
       ave = (ave / newData.length).toFixed(2)
       setAverage(ave)
     })
-  }, [selectCat, category, average])
+  }, [selectCat, expenseNote, average])
   //^ADDED CATEGORY PROP TO GET CHART TO RE-RENDER UPON NEW EXPENSE ADDED, BUT IT RENDERS WAY TOO MANY TIMES
 
 

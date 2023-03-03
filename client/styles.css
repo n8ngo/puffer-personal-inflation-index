@@ -1,7 +1,7 @@
 :root {
   --primary: #aaaaaa;
   --secondary: #e0e0e0;
-  --background-primary: #dadada;
+  --background-primary: #efefef;
   --background-secondary: #c1c1c1;;
   --border-radius: 10px;
 }
@@ -18,9 +18,10 @@ img {
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   padding: 0;
+  background-color: var(--background-primary);
   /* aspect-ratio: 960/540; */
   /* background-image: url(./waves.svg);
   background-repeat: no-repeat;
@@ -79,7 +80,7 @@ input, select, textarea, button{
   background-color: var(--secondary);
   margin: 5px;
   padding-bottom: 5px;
-  color: black;
+  color: rgb(142, 142, 142);
   text-align: center;
   
   
