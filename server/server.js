@@ -1,16 +1,16 @@
 const path = require('path');
 const express = require('express');
-const db = require('./models/dbConnect.js')
+const db = require('./models/dbConnect.js');
 const app = express();
 const middleware = require('./routes/middleware');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 /**
  * handle parsing request body
  */
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 
 /**
  * handle requests for static files
@@ -25,20 +25,19 @@ app.use(express.static(path.resolve(__dirname, '../client')));
 
 app.use('/solo', middleware);
 
-
 // catch-all route handler
 app.use((req, res) => res.status(404).send('PAGE NOT FOUND!'));
 
 /**
  * express error handler
- * 
+ *
  */
 
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 500,
-    message: { err: 'An error occurred' },
+    message: {err: 'An error occurred'},
   };
   const errorObj = Object.assign({}, defaultErr, err);
   // console.log(errorObj.log);
