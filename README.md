@@ -7,12 +7,10 @@ Puffer is a tool to track your own set basket of goods over time you can track i
 <h1> 🛠 Built With </h1>
 
 - <a href="https://react.dev/learn"> React </a>
-- <a href="https://www.typescriptlang.org/docs/handbook/jsx.html"> TypeScript </a>
+- <a href="https://recharts.org/en-US/"> React Recharts </a>
 - <a href="https://www.postgresql.org/docs/"> PostgreSQL </a>
 - <a href="https://expressjs.com/en/api.html"> Express </a>
-- <a href="https://sass-lang.com/documentation/"> Sass </a>
-- <a href="https://redis.io/docs/"> Redis </a>
-- <a href="https://reactflow.dev/docs/examples/overview/"> React Flow </a>
+- - <a href="https://webpack.js.org/concepts/"> Webpack </a>
 
 <h1 id="getting-started">⚡ Getting started </h1>
 
