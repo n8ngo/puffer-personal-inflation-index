@@ -33,3 +33,5 @@ To run the full app:
 ```js
 npm run dev
 ```
+
+Please feel free to make a pull request or submit an issue if you find a bug or have a feature request!
